@@ -5,7 +5,7 @@ class Transition
     @context = context
     @start_state = start_state
     @end_state = end_state
-    @time = Time.at(time.to_i)
+    @time = DateTime.no_usec(time)
   end
 
   def ==(other)

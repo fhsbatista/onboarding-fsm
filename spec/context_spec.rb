@@ -1,5 +1,6 @@
 require "context"
 require "transition"
+require "date_time"
 require "states/initial_data"
 
 RSpec.describe Context do
@@ -11,7 +12,7 @@ RSpec.describe Context do
       context: context,
       start_state: States::InitialData,
       end_state: context.state,
-      time: Time.at(Time.now.to_i)
+      time: DateTime.no_usec(Time.now)
     )
     expect(transition).to eq(expected_transition)
   end
