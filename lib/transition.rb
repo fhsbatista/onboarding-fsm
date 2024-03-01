@@ -1,3 +1,4 @@
+require 'date_time'
 class Transition
   attr_reader :context, :start_state, :end_state, :time
 

@@ -1,3 +1,4 @@
+require_relative "email_validation"
 module States
   class SmsValidation
     def self.next(context)
