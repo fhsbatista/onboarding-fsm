@@ -12,6 +12,13 @@ RSpec.describe States::SmsValidation do
     expect(context.state).to eq(States::EmailValidation)
   end
 
+  it "can send token to sms validaiton" do
+    context = User.new
+    context.state = States::SmsValidation
+    context.send_sms_token
+    expect(context.sms_token).not_to eq(nil)
+  end
+
   it "cannot send selfie" do
     context = User.new
     context.state = States::SmsValidation
