@@ -7,5 +7,10 @@ RSpec.describe User do
       user = User.new
       expect(user.state).to be(States::InitialData)
     end
+
+    it "can transition state" do
+      user = User.new
+      expect(user.next_state).not_to be(nil)
+    end
   end
 end
