@@ -11,6 +11,7 @@ RSpec.describe User do
     it "can transition state" do
       user = User.new
       previous = user.state
+      user.phone = '111 991 999'
       user.next_state
       current = user.state
       expect(current).not_to be(previous)

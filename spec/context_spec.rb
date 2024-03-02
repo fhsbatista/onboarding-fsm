@@ -7,6 +7,7 @@ RSpec.describe Context do
   it "returns a transition when go to next state" do
     context = Context.new
     context.state = States::InitialData
+    context.phone = '111 991 999'
     transition = context.next_state
     expected_transition = Transition.new(
       context: context,

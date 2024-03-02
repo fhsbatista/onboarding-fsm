@@ -1,6 +1,6 @@
 require 'transition'
 class Context
-  attr_accessor :state
+  attr_accessor :state, :phone
 
   def next_state
     start_state = @state

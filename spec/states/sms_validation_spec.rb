@@ -12,6 +12,12 @@ RSpec.describe States::SmsValidation do
     expect(context.state).to eq(States::EmailValidation)
   end
 
+  it "cannot transition to SmsValidation if there is no phone number" do
+    context = User.new
+    context.state = States::InitialData
+    expect { context.next_state }.to raise_error(States::Errors::InvalidStateToTransition)
+  end
+
   it "can send token to sms validaiton" do
     context = User.new
     context.state = States::SmsValidation
