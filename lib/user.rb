@@ -9,10 +9,6 @@ class User
     @state = States::SmsValidation
   end
 
-  def next_state
-    state.next(self)
-  end
-
   def send_sms_token
     @sms_token = "1234"
   end
