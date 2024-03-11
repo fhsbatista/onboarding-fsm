@@ -10,7 +10,8 @@ module States
     end
 
     def check_sms_token(token)
-      @context.state = States::EmailValidation if token == @context.sms_token
+      return :invalid_sms_token unless token == @context.sms_token
+      @context.state = States::EmailValidation
     end
 
     private
