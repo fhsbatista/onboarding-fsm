@@ -1,6 +1,5 @@
-require "states/initial_data"
 require "states/errors"
-require "transition"
+require "states/sms_validation"
 
 class User
   attr_accessor :state, :phone
@@ -11,14 +10,7 @@ class User
   end
 
   def next_state
-    start_state = @state
-    end_state = state.next(self)
-    Transition.new(
-      context: self,
-      start_state: start_state,
-      end_state: end_state,
-      time: Time.now,
-    )
+    state.next(self)
   end
 
   def send_sms_token
