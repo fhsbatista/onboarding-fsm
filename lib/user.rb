@@ -4,8 +4,9 @@ require "states/sms_validation"
 class User
   attr_accessor :state, :phone, :sms_token
   
-  def initialize
-    @state = States::SmsValidation
+  def initialize(phone:)
+    @phone = phone
+    @state = States::SmsValidation.new(self)
   end
 
   def check_sms_token(token)
