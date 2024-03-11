@@ -2,15 +2,20 @@ require "states/errors"
 require "states/sms_validation"
 
 class User
-  attr_accessor :state, :phone, :sms_token
+  attr_accessor :state, :phone, :sms_token, :email, :email_token
   
-  def initialize(phone:)
+  def initialize(phone: nil, email: nil)
     @phone = phone
+    @email = email
     @state = States::SmsValidation.new(self)
   end
 
   def check_sms_token(token)
     @state.check_sms_token(token)
+  end
+
+  def check_email_token(token)
+    @state.check_email_token(token)
   end
 
   def send_selfie

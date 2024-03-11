@@ -22,9 +22,9 @@ RSpec.describe States::SmsValidation do
 
   describe "check sms token" do
     it "transitions to EmailValidation state when token is valid" do
-      user = User.new(phone: '999 999')
+      user = User.new(phone: '999 999', email: 'email@email.com')
       user.check_sms_token("1234")
-      expect(user.state).to eq(States::EmailValidation)
+      expect(user.state).to be_a(States::EmailValidation)
     end
 
     context "token NOT valid" do
