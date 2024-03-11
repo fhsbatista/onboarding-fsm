@@ -9,10 +9,6 @@ module States
       send_sms_token
     end
 
-    def self.next(context)
-      context.state = States::EmailValidation
-    end
-
     def check_sms_token(token)
       @context.state = States::EmailValidation if token == @context.sms_token
     end
