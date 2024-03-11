@@ -10,7 +10,7 @@ class User
   end
 
   def check_sms_token(token)
-    @state.check_sms_token(self, token)
+    @state.check_sms_token(token)
   end
 
   def send_selfie
