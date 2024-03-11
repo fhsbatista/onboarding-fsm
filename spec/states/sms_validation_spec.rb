@@ -10,10 +10,10 @@ RSpec.describe States::SmsValidation do
     expect { user.state = States::SmsValidation.new(user) }.to raise_error(States::Errors::InvalidStateToTransition)
   end
 
-  it "can send token to sms validaiton" do
+  it "sends token on initialization" do
     user = User.new
-    user.state = States::SmsValidation
-    user.send_sms_token
+    user.phone = '999 999'
+    user.state = States::SmsValidation.new(user)
     expect(user.sms_token).not_to eq(nil)
   end
 
