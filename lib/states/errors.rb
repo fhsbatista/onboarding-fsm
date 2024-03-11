@@ -1,6 +1,6 @@
 module States
   module Errors
-    class InvalidAction < StandardError; end
+    class InvalidEvent < StandardError; end
     class InvalidStateToTransition < StandardError; end
   end
 end

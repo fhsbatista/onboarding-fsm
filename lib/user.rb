@@ -3,7 +3,7 @@ require "states/sms_validation"
 
 class User
   attr_accessor :state, :phone, :sms_token, :email, :email_token
-  
+
   def initialize(phone: nil, email: nil)
     @phone = phone
     @email = email
@@ -19,6 +19,6 @@ class User
   end
 
   def send_selfie
-    raise States::Errors::InvalidAction
+    raise States::Errors::InvalidEvent
   end
 end
