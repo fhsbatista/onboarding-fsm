@@ -13,8 +13,8 @@ RSpec.describe States::SmsValidation do
 
   it "cannot transition to SmsValidation if there is no phone number" do
     user = User.new
-    user.state = States::InitialData
-    expect { user.next_state }.to raise_error(States::Errors::InvalidStateToTransition)
+    user.phone = nil
+    expect { user.state = States::SmsValidation.new(user) }.to raise_error(States::Errors::InvalidStateToTransition)
   end
 
   it "can send token to sms validaiton" do

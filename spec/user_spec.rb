@@ -3,9 +3,9 @@ require 'states/initial_data'
 
 RSpec.describe User do
   describe "on initialization" do
-    it "state should be InitialState" do
+    it "state should be SmsValidation" do
       user = User.new
-      expect(user.state).to be(States::InitialData)
+      expect(user.state).to be(States::SmsValidation)
     end
 
     it "can transition state" do

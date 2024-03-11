@@ -7,7 +7,7 @@ class User
   attr_reader :sms_token
 
   def initialize
-    @state = States::InitialData
+    @state = States::SmsValidation
   end
 
   def next_state
