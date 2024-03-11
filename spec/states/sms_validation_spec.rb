@@ -29,4 +29,13 @@ RSpec.describe States::SmsValidation do
     user.state = States::SmsValidation
     expect { user.send_selfie }.to raise_error(States::Errors::InvalidAction)
   end
+
+  describe "check sms token" do
+    it "transitions to EmailValidation state when token is valid" do
+      user = User.new
+      user.state = States::SmsValidation
+      user.check_sms_token("1234")
+      expect(user.state).to eq(States::EmailValidation)
+    end
+  end
 end

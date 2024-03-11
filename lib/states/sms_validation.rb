@@ -9,5 +9,9 @@ module States
     def self.next(context)
       context.state = States::EmailValidation
     end
+
+    def self.check_sms_token(context, token)
+      context.state = States::EmailValidation
+    end
   end
 end

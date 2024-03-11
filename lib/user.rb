@@ -25,6 +25,10 @@ class User
     @sms_token = "1234"
   end
 
+  def check_sms_token(token)
+    @state.check_sms_token(self, token)
+  end
+
   def send_selfie
     raise States::Errors::InvalidAction
   end
