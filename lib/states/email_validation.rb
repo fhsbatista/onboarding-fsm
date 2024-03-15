@@ -3,7 +3,7 @@ require_relative "send_selfie"
 module States
   class EmailValidation
     def initialize(context)
-      raise States::Errors::InvalidStateToTransition if context.email.nil?
+      raise States::Errors::InvalidStateToTransition.new(reason_type: :missing_field, reason_value: :email) if context.email.nil?
       @context = context
       send_email_token
     end

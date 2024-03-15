@@ -4,7 +4,7 @@ require_relative "errors"
 module States
   class SmsValidation
     def initialize(context)
-      raise States::Errors::InvalidStateToTransition if context.phone.nil?
+      raise States::Errors::InvalidStateToTransition.new(reason_type: :missing_field, reason_value: :phone) if context.phone.nil?
       @context = context
       send_sms_token
     end
