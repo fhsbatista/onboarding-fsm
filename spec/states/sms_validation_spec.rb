@@ -14,13 +14,13 @@ RSpec.describe States::SmsValidation do
 
   it "sends token on initialization" do
     user = User.new(phone: "999 999")
-    user.state = States::SmsValidation.new(user)
+    user.transition_state(States::SmsValidation.new(user))
     expect(user.sms_token).not_to eq(nil)
   end
 
   it "cannot send selfie" do
     user = User.new(phone: "999 999")
-    user.state = States::SmsValidation
+    user.transition_state(States::SmsValidation)
     expect { user.send_selfie }.to raise_error(States::Errors::InvalidEvent)
   end
 

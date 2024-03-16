@@ -2,13 +2,18 @@ require "states/errors"
 require "states/sms_validation"
 
 class User
-  attr_accessor :state, :transitions_logs, :phone, :sms_token, :email, :email_token
+  attr_accessor :transitions_logs, :phone, :sms_token, :email, :email_token
+  attr_reader :state
 
   def initialize(phone: nil, email: nil)
     @phone = phone
     @email = email
-    @state = States::SmsValidation.new(self)
     @transitions_logs = []
+    transition_state(States::SmsValidation.new(self))
+  end
+
+  def transition_state(new_state)
+    @state = new_state
   end
 
   def check_sms_token(token)

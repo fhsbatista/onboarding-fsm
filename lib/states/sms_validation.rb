@@ -11,7 +11,7 @@ module States
 
     def check_sms_token(token)
       return :invalid_sms_token unless token == @context.sms_token
-      @context.state = States::EmailValidation.new(@context)
+      @context.transition_state(States::EmailValidation.new(@context))
     end
 
     private

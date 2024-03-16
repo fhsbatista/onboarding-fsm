@@ -10,7 +10,7 @@ module States
 
     def check_email_token(token)
       return :invalid_email_token unless token == @context.email_token
-      @context.state = States::SendSelfie.new(@context)
+      @context.transition_state(States::SendSelfie.new(@context))
     end
 
     private
