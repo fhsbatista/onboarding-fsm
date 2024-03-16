@@ -6,10 +6,13 @@ RSpec.describe User do
       user = User.new(phone: '999 999')
       expect(user.state).to be_a(States::SmsValidation)
     end
+  end
 
-    it "transations logs should be empty" do
+  describe "on state transition" do
+    it "should log" do
       user = User.new(phone: '999 999')
-      expect(user.transitions_logs).to be_empty
+      log = user.transitions_logs.first
+      expect(log.previous_state).to be_nil
     end
   end
 end

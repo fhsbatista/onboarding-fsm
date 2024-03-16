@@ -1,5 +1,6 @@
 require "states/errors"
 require "states/sms_validation"
+require "transition_log"
 
 class User
   attr_accessor :transitions_logs, :phone, :sms_token, :email, :email_token
@@ -14,6 +15,7 @@ class User
 
   def transition_state(new_state)
     @state = new_state
+    @transitions_logs << TransitionLog.new
   end
 
   def check_sms_token(token)
