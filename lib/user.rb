@@ -14,8 +14,8 @@ class User
   end
 
   def transition_state(new_state)
+    @transitions_logs << TransitionLog.new(previous_state: @state)
     @state = new_state
-    @transitions_logs << TransitionLog.new
   end
 
   def check_sms_token(token)
