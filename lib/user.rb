@@ -14,7 +14,7 @@ class User
   end
 
   def transition_state(new_state)
-    @transitions_logs << TransitionLog.new(previous_state: @state)
+    @transitions_logs << TransitionLog.new(previous_state: @state, current_state: new_state)
     @state = new_state
   end
 
