@@ -44,3 +44,7 @@ end
 gem "mongoid", "~> 8.1"
 
 gem "enumerize", "~> 2.8"
+
+gem "rspec", "~> 3.13"
+
+gem "rspec-rails", "~> 6.1"
