@@ -10,5 +10,21 @@ development:
     use_activesupport_time_zone: true
     use_utc: false
 
+test:
+  clients:
+    default:
+      database: onboarding_fcm_local_db_test
+      hosts:
+        - localhost:27017
+
+  options:
+    raise_not_found_error: false
+    use_activesupport_time_zone: true
+    use_utc: false
+
+        
+  
+
+
         
   
