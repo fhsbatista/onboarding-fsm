@@ -9,4 +9,8 @@ RSpec.describe States::SmsValidation do
     }
   end
 
+  it "sends token on initialization" do
+    user = Users::Entity.new(phone: "999 999")
+    expect(user.sms_token).not_to eq(nil)
+  end
 end

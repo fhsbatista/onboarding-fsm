@@ -34,5 +34,9 @@ module Users
     def send_selfie
       raise States::Errors::InvalidEvent
     end
+
+    def sms_token
+      @document.sms_token
+    end
   end
 end
