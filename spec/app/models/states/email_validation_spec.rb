@@ -7,6 +7,7 @@ RSpec.describe States::EmailValidation do
       expect(e.end_state).to eq(States::EmailValidation)
       expect(e.reason_type).to eq(:missing_field)
       expect(e.reason_value).to eq(:email)
+      expect(user.state).to be_a(States::SmsValidation)
     }
   end
 
