@@ -13,4 +13,10 @@ RSpec.describe States::SmsValidation do
     user = Users::Entity.new(phone: "999 999")
     expect(user.sms_token).not_to eq(nil)
   end
+
+  it "cannot send selfie" do
+    user = Users::Entity.new(phone: "999 999")
+    user.transition_state(States::SmsValidation)
+    expect { user.send_selfie }.to raise_error(States::Errors::InvalidEvent)
+  end
 end
