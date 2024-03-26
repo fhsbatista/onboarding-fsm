@@ -35,6 +35,13 @@ RSpec.describe States::SmsValidation do
         user.check_sms_token("#{valid_token}99")
         expect(user.state).to be_a(States::SmsValidation)
       end
+
+      it "returns error" do
+        user = Users::Entity.new(phone: "999 999")
+        valid_token = user.sms_token
+        error = user.check_sms_token("#{valid_token}99")
+        expect(error).to eq(:invalid_sms_token)
+      end
     end
   end
 end
