@@ -30,5 +30,15 @@ RSpec.describe States::EmailValidation do
       user.check_email_token(valid_token)
       expect(user.state).to be_a(States::SendSelfie)
     end
+
+    context "token NOT valid" do
+      it "does not transition to SendSelfie" do
+        user = Users::Entity.new(phone: "999 999", email: "email@email.com")
+        user.transition_state(States::EmailValidation.new(user))
+        valid_token = user.email_token
+        user.check_email_token("#{valid_token}99")
+        expect(user.state).to be_a(States::EmailValidation)
+      end
+    end
   end
 end
