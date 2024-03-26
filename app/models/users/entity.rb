@@ -13,6 +13,7 @@ module Users
     end
 
     def transition_state(new_state)
+      previous_state = @state
       @state = new_state
       states_map = {
         States::SmsValidation => :sms_validation,
@@ -21,6 +22,7 @@ module Users
       }
       @document.state = states_map[new_state.class]
       @document.save
+      Users::TransitionLogs::Entity.new(previous_state: previous_state, current_state: @state, user: @document)
     end
 
     def check_sms_token(token)
@@ -41,6 +43,10 @@ module Users
 
     def email_token
       @document.email_token
+    end
+
+    def transition_logs
+      @document.transition_logs
     end
   end
 end
