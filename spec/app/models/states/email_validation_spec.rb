@@ -9,4 +9,10 @@ RSpec.describe States::EmailValidation do
       expect(e.reason_value).to eq(:email)
     }
   end
+
+  it "sends token on initialization" do
+    user = Users::Entity.new(phone: "999 999", email: "email@email.com")
+    user.transition_state(States::EmailValidation.new(user))
+    expect(user.email_token).not_to eq(nil)
+  end
 end

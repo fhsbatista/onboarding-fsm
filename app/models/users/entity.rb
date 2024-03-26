@@ -38,5 +38,9 @@ module Users
     def sms_token
       @document.sms_token
     end
+
+    def email_token
+      @document.email_token
+    end
   end
 end
