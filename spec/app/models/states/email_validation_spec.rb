@@ -39,6 +39,14 @@ RSpec.describe States::EmailValidation do
         user.check_email_token("#{valid_token}99")
         expect(user.state).to be_a(States::EmailValidation)
       end
+
+      it "returns error" do
+        user = Users::Entity.new(phone: "999 999", email: "email@email.com")
+        user.transition_state(States::EmailValidation.new(user))
+        valid_token = user.email_token
+        error = user.check_email_token("#{valid_token}99")
+        expect(error).to eq(:invalid_email_token)
+      end
     end
   end
 end
