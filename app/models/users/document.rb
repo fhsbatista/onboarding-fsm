@@ -10,6 +10,6 @@ module Users
     has_many :transition_logs, class_name: 'Users::TransitionLogs::Document'
 
     field :state
-    enumerize :state, in: [:sms_validation, :email_validation, :send_selfie], default: nil
+    enumerize :state, in: %i[sms_validation email_validation send_selfie], default: nil
   end
 end

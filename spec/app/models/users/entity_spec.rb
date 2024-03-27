@@ -1,16 +1,16 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Users::Entity do
-  context "on initialization" do
-    it "state should be SmsValidation" do
-      user = Users::Entity.new(phone: "999 999")
+  context 'on initialization' do
+    it 'state should be SmsValidation' do
+      user = Users::Entity.new(phone: '999 999')
       expect(user.state).to be_a(States::SmsValidation)
     end
   end
 
-  context "on state transition" do
-    it "should log" do
-      user = Users::Entity.new(phone: "999 999", email: "test@test.com")
+  context 'on state transition' do
+    it 'logs' do
+      user = Users::Entity.new(phone: '999 999', email: 'test@test.com')
       user.transition_state(States::EmailValidation.new(user))
       log = user.transition_logs[1]
 
@@ -18,7 +18,7 @@ RSpec.describe Users::Entity do
       expect(log.current_state).to eq('email_validation')
 
       secs_tolerance = 1
-      expect(log.date_time.to_time).to be_within(secs_tolerance).of(Time.now)
+      expect(log.date_time.to_time).to be_within(secs_tolerance).of(Time.zone.now)
     end
   end
 end
