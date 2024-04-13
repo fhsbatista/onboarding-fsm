@@ -11,7 +11,7 @@ RSpec.describe States::SmsValidation do
 
   it 'sends token on initialization' do
     user = Users::Entity.new(phone: '999 999')
-    expect(user.sms_token).not_to be_nil
+    expect(user.document.sms_token).not_to be_nil
   end
 
   it 'cannot send selfie' do
@@ -23,7 +23,7 @@ RSpec.describe States::SmsValidation do
   describe 'check sms token' do
     it 'transitions to EmailValidation state when token is valid' do
       user = Users::Entity.new(phone: '999 999', email: 'email@email.com')
-      valid_token = user.sms_token
+      valid_token = user.document.sms_token
       user.check_sms_token(valid_token)
       expect(user.state).to be_a(States::EmailValidation)
     end

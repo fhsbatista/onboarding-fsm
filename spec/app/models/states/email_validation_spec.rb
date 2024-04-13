@@ -14,7 +14,7 @@ RSpec.describe States::EmailValidation do
   it 'sends token on initialization' do
     user = Users::Entity.new(phone: '999 999', email: 'email@email.com')
     user.transition_state(States::EmailValidation.new(user))
-    expect(user.email_token).not_to be_nil
+    expect(user.document.email_token).not_to be_nil
   end
 
   it 'cannot send selfie' do
@@ -27,7 +27,7 @@ RSpec.describe States::EmailValidation do
     it 'transitions to SendSelfie state when token is valid' do
       user = Users::Entity.new(phone: '999 999', email: 'email@email.com')
       user.transition_state(States::EmailValidation.new(user))
-      valid_token = user.email_token
+      valid_token = user.document.email_token
       user.check_email_token(valid_token)
       expect(user.state).to be_a(States::SendSelfie)
     end
