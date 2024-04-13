@@ -20,4 +20,9 @@ Style/FrozenStringLiteralComment:
 
 RSpec/DescribedClass:
   Enabled: false
-  
+
+RSpec/FilePath:
+  Enabled: false
+
+RSpec/SpecFilePathFormat:
+  Enabled: false
