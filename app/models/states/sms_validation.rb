@@ -1,5 +1,6 @@
 require_relative 'email_validation'
 require_relative 'errors'
+require_relative 'events/send_sms_token'
 
 module States
   class SmsValidation
@@ -10,20 +11,13 @@ module States
       end
 
       @context = context
-      send_sms_token
+      Events::SendSmsToken.new(context).call
     end
 
     def check_sms_token(token)
-      return :invalid_sms_token unless token == @context.document.sms_token
+      return :invalid_sms_token unless States::Events::CheckSmsToken.new(@context, token).call
 
       @context.transition_state(States::EmailValidation.new(@context))
-    end
-
-    private
-
-    def send_sms_token
-      @context.document.sms_token = '1234'
-      @context.document.save
     end
   end
 end
