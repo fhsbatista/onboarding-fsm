@@ -9,20 +9,13 @@ module States
       end
 
       @context = context
-      send_email_token
+      Events::SendEmailToken.new(@context).call
     end
 
     def check_email_token(token)
-      return :invalid_email_token unless token == @context.document.email_token
+      return :invalid_email_token unless Events::CheckEmailToken.new(@context, token).call
 
       @context.transition_state(States::SendSelfie.new(@context))
-    end
-
-    private
-
-    def send_email_token
-      @context.document.email_token = '1234'
-      @context.document.save
     end
   end
 end
