@@ -26,3 +26,5 @@ group :test do
   gem 'rspec', '~> 3.13'
   gem 'rspec-rails', '~> 6.1'
 end
+
+gem "faker", "~> 3.3"

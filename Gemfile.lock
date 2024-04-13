@@ -83,6 +83,8 @@ GEM
     enumerize (2.8.0)
       activesupport (>= 3.2)
     erubi (1.12.0)
+    faker (3.3.1)
+      i18n (>= 1.8.11, < 2)
     ffi (1.16.3)
     formatador (1.1.0)
     globalid (1.2.1)
@@ -277,6 +279,7 @@ DEPENDENCIES
   byebug
   debug
   enumerize (~> 2.8)
+  faker (~> 3.3)
   guard
   guard-rspec
   mongoid (~> 8.1)
