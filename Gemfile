@@ -19,9 +19,6 @@ group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'guard'
   gem 'guard-rspec'
-end
-
-group :development do
   gem 'byebug'
 end
 

@@ -4,8 +4,8 @@ module Users
                 :sms_token,
                 :email,
                 :email_token,
-                :document,
-                :state
+                :document
+    attr_accessor :state
 
     def initialize(phone: nil, email: nil)
       @phone = phone
@@ -16,16 +16,7 @@ module Users
     end
 
     def transition_state(new_state)
-      previous_state = @state
-      @state = new_state
-      states_map = {
-        States::SmsValidation => :sms_validation,
-        States::EmailValidation => :email_validation,
-        States::SendSelfie => :send_selfie
-      }
-      @document.state = states_map[new_state.class]
-      @document.save
-      Users::TransitionLogs::Entity.new(previous_state:, current_state: @state, user: @document)
+      Users::TransitionState.new(self, new_state).call
     end
 
     def check_sms_token(token)
