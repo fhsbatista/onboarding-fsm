@@ -9,6 +9,7 @@ module States
         @end_state = end_state
         @reason_type = reason_type
         @reason_value = reason_value
+        super
       end
 
       def to_s
