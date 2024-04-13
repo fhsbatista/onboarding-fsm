@@ -4,7 +4,8 @@ module States
   class EmailValidation
     def initialize(context)
       if context.email.nil?
-        raise States::Errors::InvalidStateToTransition.new(end_state: self.class, reason_type: :missing_field,
+        raise States::Errors::InvalidStateToTransition.new(end_state: self.class,
+                                                           reason_type: :missing_field,
                                                            reason_value: :email)
       end
 

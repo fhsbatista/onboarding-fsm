@@ -6,7 +6,8 @@ module States
   class SmsValidation
     def initialize(context)
       if context.phone.nil?
-        raise States::Errors::InvalidStateToTransition.new(end_state: self.class, reason_type: :missing_field,
+        raise States::Errors::InvalidStateToTransition.new(end_state: self.class,
+                                                           reason_type: :missing_field,
                                                            reason_value: :phone)
       end
 
