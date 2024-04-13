@@ -1,7 +1,11 @@
 module Users
   class Entity
-    attr_accessor :phone, :sms_token, :email, :email_token, :document
-    attr_reader :state
+    attr_reader :phone,
+                :sms_token,
+                :email,
+                :email_token,
+                :document,
+                :state
 
     def initialize(phone: nil, email: nil)
       @phone = phone
@@ -35,7 +39,7 @@ module Users
     def send_selfie
       raise States::Errors::InvalidEvent
     end
-    
+
     def transition_logs
       @document.transition_logs
     end
