@@ -10,5 +10,10 @@ module Api
         render json: { message: "Couldn't create user due to missing params" }, status: :bad_request
       end
     end
+
+    def check_sms_token
+      token = params[:token]
+      render json: { message: 'Token is valid' }
+    end
   end
 end
