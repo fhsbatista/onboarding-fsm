@@ -10,7 +10,8 @@ module Users
     def initialize(phone: nil, email: nil)
       @phone = phone
       @email = email
-      @document = Users::Document.new(phone: @phone, email: @email, state: nil)
+      @state = States::Initial.new(self)
+      @document = Users::Document.new(phone: @phone, email: @email, state: @state)
       @document.save
       transition_state(States::SmsValidation.new(self))
     end
