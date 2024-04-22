@@ -7,7 +7,7 @@ RSpec.describe Api::UsersController, type: :controller do
         Faker::Config.locale = 'pt-BR'
         user = Users::Entity.create(phone: Faker::PhoneNumber.cell_phone, email: Faker::Internet.email)
         post :check_sms_token, params: {
-          token: '1234',
+          token: user.sms_token,
           email: user.email
         }
       end
@@ -19,8 +19,10 @@ RSpec.describe Api::UsersController, type: :controller do
     context 'when token is NOT valid' do
       before do
         Faker::Config.locale = 'pt-BR'
+        user = Users::Entity.create(phone: Faker::PhoneNumber.cell_phone, email: Faker::Internet.email)
         post :check_sms_token, params: {
-          token: '1234'
+          token: "#{user.document.sms_token}xx",
+          email: user.email
         }
       end
 

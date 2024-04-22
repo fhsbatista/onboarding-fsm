@@ -14,10 +14,14 @@ module Api
     def check_sms_token
       token = params[:token]
       email = params[:email]
-      user_document = Users::Document.where(email:).first
-      user_entity =
+      user = Users::Entity.find(email)
+      is_token_valid = user.check_sms_token(token)
 
-        render json: { message: 'Token is valid' }
+      if is_token_valid
+        render json: { message: 'Token is valid' } unless is_token_valid
+      else
+        render json: { message: 'Invalid token' }, status: :bad_request
+      end
     end
   end
 end

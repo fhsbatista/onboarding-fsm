@@ -9,7 +9,7 @@ module Users
 
     private_class_method :new
 
-    def initialize(state:, document:, phone: nil, email: nil)
+    def initialize(document:, phone: nil, email: nil, state: nil)
       @phone = phone
       @email = email
       @state = state
@@ -26,6 +26,14 @@ module Users
     rescue StandardError => e
       user.document.destroy
       raise e
+    end
+
+    def self.find(email)
+      document = Users::Document.where(email:).first
+      user = new(email: document.email, phone: document.phone, document:)
+      state_type = Users::TransitionState::STATES_MAP.key(document.state.to_sym)
+      user.state = state_type.new(user)
+      user
     end
 
     def transition_state(new_state)
@@ -47,5 +55,7 @@ module Users
     def transition_logs
       @document.transition_logs
     end
+
+    private
   end
 end
