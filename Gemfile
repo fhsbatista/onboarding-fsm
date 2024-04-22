@@ -16,10 +16,10 @@ gem 'rubocop-rspec', require: false
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do
+  gem 'byebug'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'guard'
   gem 'guard-rspec'
-  gem 'byebug'
 end
 
 group :test do
@@ -27,4 +27,4 @@ group :test do
   gem 'rspec-rails', '~> 6.1'
 end
 
-gem "faker", "~> 3.3"
+gem 'faker', '~> 3.3'

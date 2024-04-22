@@ -7,13 +7,25 @@ module Users
                 :document
     attr_accessor :state
 
-    def initialize(phone: nil, email: nil)
+    private_class_method :new
+
+    def initialize(state:, document:, phone: nil, email: nil)
       @phone = phone
       @email = email
-      @state = States::Initial.new(self)
-      @document = Users::Document.new(phone: @phone, email: @email, state: @state)
-      @document.save
-      transition_state(States::SmsValidation.new(self))
+      @state = state
+      @document = document
+    end
+
+    def self.create(phone: nil, email: nil)
+      document = Users::Document.new(phone:, email:, state: nil)
+      document.save
+      user = new(phone:, email:, document:, state: nil)
+      user.state = States::Initial.new(user)
+      user.transition_state(States::SmsValidation.new(user))
+      user
+    rescue StandardError => e
+      user.document.destroy
+      raise e
     end
 
     def transition_state(new_state)
