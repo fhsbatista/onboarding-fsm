@@ -7,8 +7,8 @@ RSpec.describe Api::UsersController, type: :controller do
         Faker::Config.locale = 'pt-BR'
         user = Users::Entity.create(phone: Faker::PhoneNumber.cell_phone, email: Faker::Internet.email)
         post :check_sms_token, params: {
-          token: user.sms_token,
-          email: user.email
+          token: user.document.sms_token,
+          email: user.document.email
         }
       end
 
@@ -22,7 +22,7 @@ RSpec.describe Api::UsersController, type: :controller do
         user = Users::Entity.create(phone: Faker::PhoneNumber.cell_phone, email: Faker::Internet.email)
         post :check_sms_token, params: {
           token: "#{user.document.sms_token}xx",
-          email: user.email
+          email: user.document.email
         }
       end
 

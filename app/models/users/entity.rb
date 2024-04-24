@@ -41,6 +41,8 @@ module Users
     end
 
     def check_sms_token(token)
+      return %i[error invalid_action] unless @state.respond_to? :check_sms_token
+
       @state.check_sms_token(token)
     end
 
@@ -55,7 +57,5 @@ module Users
     def transition_logs
       @document.transition_logs
     end
-
-    private
   end
 end

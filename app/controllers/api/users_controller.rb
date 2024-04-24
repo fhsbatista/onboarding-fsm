@@ -15,13 +15,21 @@ module Api
       token = params[:token]
       email = params[:email]
       user = Users::Entity.find(email)
-      is_token_valid = user.check_sms_token(token)
+      result, error = user.check_sms_token(token)
 
-      if is_token_valid
-        render json: { message: 'Token is valid' } unless is_token_valid
-      else
-        render json: { message: 'Invalid token' }, status: :bad_request
+      if result == :error
+        case error
+        when :invalid_action
+          return render json: { message: 'Cannot check sms token on current state' }, status: :bad_request
+        else
+          return render json: { message: 'Unexpected error' }, status: :bad_request
+        end
       end
+
+      is_token_valid = result != :invalid_sms_token
+      return render json: { message: 'Invalid token' }, status: :bad_request unless is_token_valid
+
+      render json: { message: 'Token is valid' }
     end
   end
 end

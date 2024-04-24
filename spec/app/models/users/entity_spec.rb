@@ -27,4 +27,14 @@ RSpec.describe Users::Entity do
       expect(log.date_time.to_time).to be_within(secs_tolerance).of(Time.zone.now)
     end
   end
+
+  context 'on action call' do
+    it 'returns invalid action if state doesn`t match the action' do
+      user = Users::Entity.create(phone: '999 999', email: 'test@test.com')
+      allow(user.state).to receive(:respond_to?).and_return(false)
+      result, error = user.check_sms_token('1234')
+      expect(result).to eq(:error)
+      expect(error).to eq(:invalid_action)
+    end
+  end
 end
