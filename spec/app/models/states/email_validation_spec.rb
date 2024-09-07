@@ -21,7 +21,7 @@ RSpec.describe States::EmailValidation do
   it 'cannot send selfie' do
     user = Users::Entity.create(phone: '999 999', email: 'email@email.com')
     user.transition_state(States::EmailValidation.new(user))
-    expect { user.send_selfie }.to raise_error(States::Errors::InvalidEvent)
+    expect(user.send_selfie('base64')).to eq(%i[error invalid_action])
   end
 
   describe 'check sms token' do
