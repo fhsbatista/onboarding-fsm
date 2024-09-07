@@ -31,5 +31,26 @@ module Api
 
       render json: { message: 'Token is valid' }
     end
+
+    def check_email_token
+      token = params[:token]
+      email = params[:email]
+      user = Users::Entity.find(email)
+      result, error = user.check_email_token(token)
+
+      if result == :error
+        case error
+        when :invalid_action
+          return render json: { message: 'Cannot check email token on current state' }, status: :bad_request
+        else
+          return render json: { message: 'Unexpected error' }, status: :bad_request
+        end
+      end
+
+      is_token_valid = result != :invalid_email_token
+      return render json: { message: 'Invalid token' }, status: :bad_request unless is_token_valid
+
+      render json: { message: 'Token is valid' }
+    end
   end
 end
