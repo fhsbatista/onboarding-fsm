@@ -3,7 +3,8 @@ module Users
     STATES_MAP = {
       States::SmsValidation => :sms_validation,
       States::EmailValidation => :email_validation,
-      States::SendSelfie => :send_selfie
+      States::SendSelfie => :send_selfie,
+      States::Active => :active
     }.freeze
 
     def initialize(user, new_state)
